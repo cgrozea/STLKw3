@@ -3354,12 +3354,10 @@ struct rm_tch_ts *rm_tch_input_init(struct device *dev, unsigned int irq,
 	//input_set_capability(input_dev, EV_MSC, MSC_ACTIVITY);
 	input_set_capability(input_dev, EV_ABS, ABS_X);
 	input_set_capability(input_dev, EV_ABS, ABS_Y);
-	input_set_capability(input_dev, EV_ABS, ABS_PRESSURE);
 	input_set_capability(input_dev, EV_KEY, BTN_TOUCH);
 
 #if (INPUT_PROTOCOL_CURRENT_SUPPORT == INPUT_PROTOCOL_TYPE_A)
 	__set_bit(EV_ABS, input_dev->evbit);
-	input_set_abs_params(input_dev, ABS_MT_PRESSURE, 0, 0xFF, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TRACKING_ID, 0, 32, 0, 0);
 
 	__set_bit(EV_KEY, input_dev->evbit);
@@ -3367,8 +3365,6 @@ struct rm_tch_ts *rm_tch_input_init(struct device *dev, unsigned int irq,
 #else
 	__set_bit(EV_KEY, input_dev->evbit);
 	__set_bit(EV_ABS, input_dev->evbit);
-	input_set_abs_params(input_dev, ABS_MT_PRESSURE,
-		0, 0xFF, 0, 0);
 
 	__set_bit(BTN_TOOL_RUBBER, input_dev->keybit);
 #ifdef INPUT_MT_DIRECT
