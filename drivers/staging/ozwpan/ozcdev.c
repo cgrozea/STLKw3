@@ -687,6 +687,9 @@ void oz_cdev_rx(struct oz_pd *pd, struct oz_elt *elt)
 		oz_trace("Cannot claim serial context.\n");
 		return;
 	}
+	
+	if(elt->length < sizeof(struct oz_app_hdr))
+		goto out;
 
 	app_hdr = (struct oz_app_hdr *)(oz_elt_data(elt));
 	/* If sequence number is non-zero then check it is not a duplicate.
